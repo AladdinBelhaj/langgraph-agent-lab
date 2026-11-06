@@ -1,0 +1,9 @@
+[10:02:11] INFO  Starting build #42
+[10:02:15] INFO  Resolving dependencies
+[10:02:31] WARN  Deprecated API used in UserService.java
+[10:02:48] INFO  Running unit tests
+[10:03:02] ERROR Test failed: PaymentServiceTest.shouldChargeCard
+[10:03:02] ERROR NullPointerException at PaymentService.java:57
+[10:03:05] ERROR Test failed: PaymentServiceTest.shouldRefund
+[10:03:06] INFO  Tests run: 41, Failures: 2
+[10:03:06] ERROR Build failed: test phase
