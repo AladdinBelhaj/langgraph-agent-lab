@@ -8,6 +8,7 @@ class Triage (BaseModel):
     """
     category: Literal['vulnerable_image', 'misconfiguration', 'suspicious_runtime', 'benign']
     severity: Literal['low', 'medium', 'high', 'critical']
+    summary: str
     evidence: list[str]
     recommended_action: str
     confidence: float = Field(ge=0, le=1)
