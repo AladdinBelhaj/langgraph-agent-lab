@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Literal
 
 
@@ -10,4 +10,4 @@ class Triage (BaseModel):
     severity: Literal['low', 'medium', 'high', 'critical']
     evidence: list[str]
     recommended_action: str
-    confidence : float
+    confidence: float = Field(ge=0, le=1)
