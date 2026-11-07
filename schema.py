@@ -4,7 +4,7 @@ from typing import Literal
 
 class Triage (BaseModel):
     """
-    Triage model for representing the triage status of a patient.
+    Triage model for representing the triage status of an container/image issue detected by Trivy.
     """
     category: Literal['vulnerable_image', 'misconfiguration', 'suspicious_runtime', 'benign']
     severity: Literal['low', 'medium', 'high', 'critical']
