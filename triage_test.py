@@ -17,6 +17,10 @@ triager = ChatOpenAI(
     temperature=0,
 ).with_structured_output(Triage)
 
-result = triager.invoke(finding)
+system_prompt = "You are a security analyst. Use only the evidence given."
 
+result = triager.invoke([
+    ("system", system_prompt),
+    ("user", finding),
+])
 print(result)
