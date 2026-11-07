@@ -64,19 +64,17 @@ def triage(text):
 
 
 cases = [
-    (finding, "vulnerable_image"),
-    (event_shadow, "suspicious_runtime"),
-    (event_healthcheck, "suspicious_runtime"),
-    (misconfig, "misconfiguration"),
-    (event_pkg_build, "benign"),
+    ("finding", finding, "vulnerable_image"),
+    ("shadow", event_shadow, "suspicious_runtime"),
+    ("healthcheck", event_healthcheck, "suspicious_runtime"),
+    ("misconfig", misconfig, "misconfiguration"),
+    ("pkg_build", event_pkg_build, "benign"),
 ]
 
-for text, expected_category in cases:
-    result = triage(text)
-    print(
-        f"Expected: {expected_category}, "
-        f"Predicted: {result.category}, Severity: {result.severity}"
-    )
-    if result.category != expected_category:
-        print(result.summary)
-        print(result.recommended_action)
+for case_name, text, expected_category in cases:
+    correct = 0
+    for _ in range(5):
+        result = triage(text)
+        if result.category == expected_category:
+            correct += 1
+    print(f"{case_name}: {correct}/5")
