@@ -25,6 +25,10 @@ event_healthcheck = """Rule: Terminal shell in container
 Priority: Notice
 Output: A shell was spawned in a container with an attached terminal (user=root, container=orders-api, shell=sh, parent=containerd-shim, cmdline=sh /scripts/healthcheck.sh)"""
 
+event_pkg_build = """Rule: Launch Package Management Process in Container
+Priority: Error
+Output: Package management process launched in container (user=root, container=ci-builder, image=registry.internal/ci-builder:latest, process=apt-get, cmdline=apt-get install -y git, pipeline=build-1423)"""
+
 misconfig = """Rule: Privileged container started
 Priority: Warning
 Output: Privileged container started (user=root, container=metrics-agent, image=internal/metrics-agent:2.3, privileged=true)"""
@@ -47,7 +51,9 @@ Severity:
 Rules:
 - Use only the evidence given. Do not invent details.
 - If the evidence supports a legitimate explanation, choose benign.
-- Put exact quotes from the input in the evidence field."""
+- Put exact quotes from the input in the evidence field.
+- Context fields in the evidence (who ran it, which container, which job or pipeline) count as evidence of a legitimate explanation. Weigh them before deciding.
+- A weakness that is merely present (for example, running as root) does not make an expected, attributable action a misconfiguration. Choose benign when the action is explained by its context."""
 
 
 def triage(text):
@@ -60,8 +66,9 @@ def triage(text):
 cases = [
     (finding, "vulnerable_image"),
     (event_shadow, "suspicious_runtime"),
-    (event_healthcheck, "benign"),
+    (event_healthcheck, "suspicious_runtime"),
     (misconfig, "misconfiguration"),
+    (event_pkg_build, "benign"),
 ]
 
 for text, expected_category in cases:
