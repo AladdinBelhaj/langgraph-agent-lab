@@ -11,6 +11,22 @@
            {"VulnerabilityID": "CVE-2022-0778", "PkgName": "openssl", "InstalledVersion": "1.1.1k-1", "FixedVersion": "1.1.1n-0+deb10u1", "Severity": "HIGH", "Status": "fixed", "Title": "openssl: infinite loop in BN_mod_sqrt() reachable when parsing certificates"},
            {"VulnerabilityID": "CVE-2021-3711", "PkgName": "libssl1.1", "InstalledVersion": "1.1.1k-1", "FixedVersion": "", "Severity": "MEDIUM", "Status": "affected", "Title": "openssl: SM2 Decryption Buffer Overflow"}
          ]
+       },
+       {
+         "Target": "Dockerfile",
+         "Class": "config",
+         "Type": "dockerfile",
+         "Misconfigurations": [
+           {"ID": "DS002", "Title": "Image user should not be 'root'", "Message": "Specify at least 1 USER command in Dockerfile with non-root user as argument", "Resolution": "Add 'USER <non root user name>' line to the Dockerfile", "Severity": "HIGH", "Status": "FAIL"},
+           {"ID": "DS026", "Title": "No HEALTHCHECK defined", "Message": "Add HEALTHCHECK instruction in your Dockerfile", "Resolution": "Add HEALTHCHECK instruction in Dockerfile", "Severity": "LOW", "Status": "FAIL"}
+         ]
+       },
+       {
+         "Target": "config/settings.py",
+         "Class": "secret",
+         "Secrets": [
+           {"RuleID": "aws-access-key-id", "Category": "AWS", "Severity": "CRITICAL", "Title": "AWS Access Key ID", "StartLine": 12, "Match": "aws_key = ********************"}
+         ]
        }
      ]
    }
