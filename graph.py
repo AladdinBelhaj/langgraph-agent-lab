@@ -27,10 +27,15 @@ def falco_agent(state: State):
 g = StateGraph(State)
 g.add_node("trivy_agent", trivy_agent)
 g.add_node("falco_agent", falco_agent)
-g.add_conditional_edges(START, route)
+g.add_conditional_edges(
+    START,
+    route,
+    {"trivy_agent": "trivy_agent", "falco_agent": "falco_agent"},
+)
 g.add_edge("trivy_agent", END)
 g.add_edge("falco_agent", END)
 app = g.compile()
+
 
 
 def run(payload: dict):
