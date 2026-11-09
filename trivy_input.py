@@ -2,11 +2,12 @@ import json
 
 SEV_ORDER = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3, "UNKNOWN": 4}
 
-
 def load_findings(path):
     with open(path, encoding="utf-8") as f:
-        report = json.load(f)
+        return parse_report(json.load(f))
 
+
+def parse_report(report):
     artifact = report.get("ArtifactName", "unknown")
     findings = []
 

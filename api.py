@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-
+from trivy_input import parse_report
 from schema import Triage
 from triage_core import triage
 
@@ -16,6 +16,15 @@ def health():
     return {"status": "ok"}
 
 
-@app.post("/triage", response_model=Triage)
-def triage_finding(body: FindingIn):
-    return triage(body.text)
+@app.post("/triage/trivy")
+def triage_trivy(report: dict, limit: int = 5):
+    findings = parse_report(report)[:limit]
+    return [
+        {
+            "id": f["id"],
+            "kind": f["kind"],
+            "severity": f["severity"],
+            "triage": triage(f["text"]),
+           }
+        for f in findings
+    ]
