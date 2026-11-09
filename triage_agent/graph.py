@@ -2,9 +2,9 @@ from typing import TypedDict
 
 from langgraph.graph import StateGraph, START, END
 
-from falco_core import triage_event
-from schema import RuntimeTriage, Triage
-from triage_core import triage
+from .falco_core import triage_event
+from .schema import RuntimeTriage, Triage
+from .triage_core import triage
 
 
 class State(TypedDict):

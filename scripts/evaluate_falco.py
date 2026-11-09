@@ -1,6 +1,6 @@
 import json
 
-from falco_core import triage_event
+from triage_agent.falco_core import triage_event
 
 with open("fixtures/falco/events.json", encoding="utf-8") as f:
     events = json.load(f)

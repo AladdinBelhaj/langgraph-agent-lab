@@ -1,7 +1,7 @@
 import json
 
-from graph import app, run
-from trivy_input import load_findings
+from triage_agent.graph import app, run
+from triage_agent.trivy_input import load_findings
 
 trivy = load_findings("fixtures/trivy/sample_nginx.json")[:2]
 with open("fixtures/falco/events.json", encoding="utf-8") as f:

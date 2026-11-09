@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from trivy_input import parse_report
-from schema import Triage
-from triage_core import triage
+from .schema import Triage
+from .triage_core import triage
+from .trivy_input import parse_report
 
 app = FastAPI(title="Container security triage agent")
 

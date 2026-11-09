@@ -1,7 +1,7 @@
 import os
 
 from langchain_openai import ChatOpenAI
-from schema import Triage
+from triage_agent.schema import Triage
 
 finding = """Package: openssl 1.1.1k-1
 Vulnerability: CVE-2022-0778

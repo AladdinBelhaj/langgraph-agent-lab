@@ -2,7 +2,7 @@ import json
 import os
 
 from langchain_openai import ChatOpenAI
-from schema import RuntimeTriage
+from .schema import RuntimeTriage
 
 runtime_triager = ChatOpenAI(
     model=os.environ["LLM_MODEL"],

@@ -1,7 +1,7 @@
 import os
 
 from langchain_openai import ChatOpenAI
-from schema import Triage
+from .schema import Triage
 
 triager = ChatOpenAI(
     model=os.environ["LLM_MODEL"],

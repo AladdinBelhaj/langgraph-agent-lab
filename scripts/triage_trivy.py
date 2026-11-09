@@ -1,7 +1,7 @@
 import sys
 
-from triage_core import triage
-from trivy_input import load_findings
+from triage_agent.triage_core import triage
+from triage_agent.trivy_input import load_findings
 
 path = sys.argv[1]
 limit = int(sys.argv[2]) if len(sys.argv) > 2 else 10
