@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from .schema import Triage
+from .graph import run
+from triage_agent.falco_core import triage_event
+from .schema import Triage,RuntimeTriage
 from .triage_core import triage
 from .trivy_input import parse_report
 
@@ -28,3 +30,14 @@ def triage_trivy(report: dict, limit: int = 5):
            }
         for f in findings
     ]
+
+
+
+@app.post("/triage/falco", response_model=RuntimeTriage)
+def triage_falco(event: dict):
+    return triage_event(event)
+
+@app.post("/analyze")
+def analyze(payload: dict):
+    """Router endpoint: a Falco alert goes to the runtime agent, anything else to the Trivy agent."""
+    return run(payload)
