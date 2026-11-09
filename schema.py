@@ -12,3 +12,12 @@ class Triage(BaseModel):
     evidence: list[str]
     recommended_action: str
     confidence: float = Field(ge=0, le=1)
+
+class RuntimeTriage(BaseModel):
+    """Triage of one Falco runtime alert from a container."""
+
+    category: Literal["suspicious", "benign"]
+    severity: Literal["low", "medium", "high", "critical"]
+    summary: str
+    evidence: list[str]
+    recommended_action: str
